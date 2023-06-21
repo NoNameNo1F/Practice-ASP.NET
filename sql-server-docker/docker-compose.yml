@@ -15,7 +15,7 @@ services:
       - mssqlvolume:/var/opt/mssql/data # thư mục lưu DB
       # - ./bk:/var/opt/mssql/backup
     ports:
-      - "1433:1433"     
+      - "1433:1433"
                         
 volumes:                                
     mssqlvolume:        
