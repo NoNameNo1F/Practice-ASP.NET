@@ -1,0 +1,46 @@
+@* @page "/blog/chinhsuabaiviet/int?:{id}" *@
+@page "/blog/chinhsuabaiviet/{id:int}"
+@model asprazor04.Pages_Blog.EditModel
+
+@{
+    ViewData["Title"] = "Chỉnh sửa";
+}
+
+<h1>Chỉnh sửa</h1>
+
+<h4>Tiêu đề</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Article.Id" />
+            <div class="form-group">
+                <label asp-for="Article.Title" class="control-label"></label>
+                <input asp-for="Article.Title" class="form-control" />
+                <span asp-validation-for="Article.Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Article.Created" class="control-label"></label>
+                <input asp-for="Article.Created" class="form-control" />
+                <span asp-validation-for="Article.Created" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Article.Content" class="control-label"></label>
+                <textarea asp-for="Article.Content" class="form-control" ></textarea>
+                <span asp-validation-for="Article.Content" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
