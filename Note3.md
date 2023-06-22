@@ -1,3 +1,5 @@
+
+
 REQUIRED: 
     dotnet tool uninstall --global dotnet-aspnet-codegenerator
     dotnet tool install --global dotnet-aspnet-codegenerator
