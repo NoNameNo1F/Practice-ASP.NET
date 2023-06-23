@@ -23,7 +23,9 @@ namespace asprazor04.Areas.Identity.Pages.Account
             _signInManager = signInManager;
             _logger = logger;
         }
-
+        // public async OnGet(){
+        //     _signInManager.IsSignedIn(User);
+        // }
         public async Task<IActionResult> OnPost(string returnUrl = null)
         {
             await _signInManager.SignOutAsync();
@@ -34,9 +36,11 @@ namespace asprazor04.Areas.Identity.Pages.Account
             }
             else
             {
+                returnUrl = Url.Content("~/");
                 // This needs to be a redirect so that the browser performs a new
                 // request and the identity for the user gets updated.
-                return RedirectToPage();
+                return LocalRedirect(returnUrl);
+                // return RedirectToPage();
             }
         }
     }
