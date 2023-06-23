@@ -59,8 +59,8 @@ namespace asprazor04.Areas.Identity.Pages.Account
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
             [DataType(DataType.Password)]
-            [Display(Name = "Confirm password")]
-            [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+            [Display(Name = "Nhập lại mật khẩu")]
+            [Compare("Password", ErrorMessage = "Mật khẩu nhập lại không khớp")]
             public string ConfirmPassword { get; set; }
 
             /// <summary>
@@ -76,7 +76,7 @@ namespace asprazor04.Areas.Identity.Pages.Account
         {
             if (code == null)
             {
-                return BadRequest("A code must be supplied for password reset.");
+                return BadRequest("Code phải được cấp để reset password");
             }
             else
             {

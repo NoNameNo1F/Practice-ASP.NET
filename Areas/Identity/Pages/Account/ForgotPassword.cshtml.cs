@@ -45,8 +45,9 @@ namespace asprazor04.Areas.Identity.Pages.Account
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
-            [Required]
-            [EmailAddress]
+            [Required(ErrorMessage = "phải nhập {0}")]
+            [EmailAddress(ErrorMessage = "Sai định dạng {0}")]
+            [Display(Name = "Email")]
             public string Email { get; set; }
         }
 
@@ -63,6 +64,7 @@ namespace asprazor04.Areas.Identity.Pages.Account
 
                 // For more information on how to enable account confirmation and password reset please
                 // visit https://go.microsoft.com/fwlink/?LinkID=532713
+                // Nếu có tài khoản quên mk thì sẽ tạo Token để đính vào mail xác nhận
                 var code = await _userManager.GeneratePasswordResetTokenAsync(user);
                 code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
                 var callbackUrl = Url.Page(
@@ -74,7 +76,7 @@ namespace asprazor04.Areas.Identity.Pages.Account
                 await _emailSender.SendEmailAsync(
                     Input.Email,
                     "Reset Password",
-                    $"Please reset your password by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                    $"Nhấn để đặt lại mật khẩu <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>vào đây</a>.");
 
                 return RedirectToPage("./ForgotPasswordConfirmation");
             }
