@@ -1,17 +1,16 @@
-﻿@page
+﻿@page "/external-login"
 @model ExternalLoginModel
 @{
-    ViewData["Title"] = "Register";
+    ViewData["Title"] = "Tạo hoặc liên kết với thirdparty";
 }
 
 <h1>@ViewData["Title"]</h1>
-<h2 id="external-login-title">Associate your @Model.ProviderDisplayName account.</h2>
+<h2 id="external-login-title">Liên kết với tài khoản @Model.ProviderDisplayName.</h2>
 <hr />
 
 <p id="external-login-description" class="text-info">
-    You've successfully authenticated with <strong>@Model.ProviderDisplayName</strong>.
-    Please enter an email address for this site below and click the Register button to finish
-    logging in.
+    Bạn đã xác thực thành công với <strong>@Model.ProviderDisplayName</strong>.
+    Hãy nhập địa chỉ email vào site bên dưới và nhấn ĐĂNG KÝ để hoàn thành đăng nhập.
 </p>
 
 <div class="row">
@@ -23,7 +22,7 @@
                 <label asp-for="Input.Email" class="form-label"></label>
                 <span asp-validation-for="Input.Email" class="text-danger"></span>
             </div>
-            <button type="submit" class="w-100 btn btn-lg btn-primary">Register</button>
+            <button type="submit" class="w-100 btn btn-lg btn-primary">Đăng ký</button>
         </form>
     </div>
 </div>
