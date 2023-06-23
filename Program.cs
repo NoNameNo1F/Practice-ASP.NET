@@ -1,4 +1,4 @@
-
+using System.Net;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity.UI.Services;
@@ -9,7 +9,6 @@ using Album.Mail;
 using razorweb.models;
 
 var builder = WebApplication.CreateBuilder(args);
-
 
 
 // trước 35
@@ -62,17 +61,38 @@ builder.Services.Configure<IdentityOptions> (options => {
     options.SignIn.RequireConfirmedAccount = true;
 });
 
-    builder.Services.ConfigureApplicationCookie(options =>{
-        options.LoginPath ="/login/";
-        options.LogoutPath = "/logout/";
-        options.AccessDeniedPath = "/access-denied";
-    });
+builder.Services.ConfigureApplicationCookie(options =>{
+    options.LoginPath ="/login/";
+    options.LogoutPath = "/logout/";
+    options.AccessDeniedPath = "/access-denied";
+});
 
+// Config Provider Third Party Authentication
+builder.Services.AddAuthentication()
+    .AddGoogle(googleOptions =>{
+        // doc thongtin Authentication:google tu appsettings
+          var googleAuthSection = builder.Configuration.GetSection("Authentication:Google");
 
+          // Thiet lap Client-ID va Client-Secret
+          googleOptions.ClientId = googleAuthSection["ClientId"];
+          googleOptions.ClientSecret = googleAuthSection["ClientSecret"];
+          // Cau hinh Url Callback cho google default la: signin-google
+          googleOptions.CallbackPath = "/login-google";          
+    })
+    .AddFacebook(facebookOptions => {
+        var facebookAuthSection = builder.Configuration.GetSection("Authentication:Facebook");
+
+        facebookOptions.AppId = facebookAuthSection["AppId"];
+        facebookOptions.AppSecret = facebookAuthSection["AppSecret"];
+        facebookOptions.CallbackPath = "/login-facebook"; 
+    })
+    // .AddTwitter(twitterOptions => {}) 
+    // .AddMicrosoftAccount(microsoftOptions => {}) 
+    ;
 
 
 var app = builder.Build();
-
+app.UseForwardedHeaders();
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
