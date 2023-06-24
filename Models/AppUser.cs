@@ -11,5 +11,8 @@ namespace razorweb.models{
         [Column(TypeName = "nvarchar")]
         [StringLength(400)]
         public virtual string? HomeAddress { get; set; }
+
+        [DataType(DataType.Date)]
+        public virtual DateTime? BirthDate { get; set; }
     }
 }
