@@ -1,7 +1,7 @@
-﻿@page
+﻿@page "/reset-authenticator"
 @model ResetAuthenticatorModel
 @{
-    ViewData["Title"] = "Reset authenticator key";
+    ViewData["Title"] = "Đặt lại khóa xác thực";
     ViewData["ActivePage"] = ManageNavPages.TwoFactorAuthentication;
 }
 
@@ -10,15 +10,15 @@
 <div class="alert alert-warning" role="alert">
     <p>
         <span class="glyphicon glyphicon-warning-sign"></span>
-        <strong>If you reset your authenticator key your authenticator app will not work until you reconfigure it.</strong>
+        <strong>Nếu bạn đặt lại khóa xác thực trên ứng dụng xác thực thì ứng dụng sẽ không hoạt động cho đến khi bạn cấu hình lại chúng.</strong>
     </p>
     <p>
-        This process disables 2FA until you verify your authenticator app.
-        If you do not complete your authenticator app configuration you may lose access to your account.
+        Quá trình này sẽ tắt 2FA cho đến khi bạn xác thực Ứng dụng xác thực của bạn.
+        Nếu bạn không hoàn thành cấu hình ứng dụng xác thực, bạn có thể mất quyền truy cập tài khoản.
     </p>
 </div>
 <div>
     <form id="reset-authenticator-form" method="post">
-        <button id="reset-authenticator-button" class="btn btn-danger" type="submit">Reset authenticator key</button>
+        <button id="reset-authenticator-button" class="btn btn-danger" type="submit">Đặt lại khóa xác thực</button>
     </form>
 </div>

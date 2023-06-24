@@ -1,8 +1,8 @@
-﻿@page
+﻿@page "/user/profile/two-factor-authentication"
 @using Microsoft.AspNetCore.Http.Features
 @model TwoFactorAuthenticationModel
 @{
-    ViewData["Title"] = "Two-factor authentication (2FA)";
+    ViewData["Title"] = "Xác thực 2 yếu tố (2FA)";
     ViewData["ActivePage"] = ManageNavPages.TwoFactorAuthentication;
 }
 
@@ -17,51 +17,51 @@
             if (Model.RecoveryCodesLeft == 0)
             {
                 <div class="alert alert-danger">
-                    <strong>You have no recovery codes left.</strong>
-                    <p>You must <a asp-page="./GenerateRecoveryCodes">generate a new set of recovery codes</a> before you can log in with a recovery code.</p>
+                    <strong>Bạn không còn mã khôi phục nào</strong>
+                    <p>Bạn phải <a asp-page="./GenerateRecoveryCodes">tạo 1 tập các mã khôi phục </a> trước khi bạn có thể đăng nhập với mã khôi phục.</p>
                 </div>
             }
             else if (Model.RecoveryCodesLeft == 1)
             {
                 <div class="alert alert-danger">
-                    <strong>You have 1 recovery code left.</strong>
-                    <p>You can <a asp-page="./GenerateRecoveryCodes">generate a new set of recovery codes</a>.</p>
+                    <strong>Bạn có 1 mã khôi phục.</strong>
+                    <p>Bạn có thể <a asp-page="./GenerateRecoveryCodes">tạo ra tập các mã khôi phục mới</a>.</p>
                 </div>
             }
             else if (Model.RecoveryCodesLeft <= 3)
             {
                 <div class="alert alert-warning">
-                    <strong>You have @Model.RecoveryCodesLeft recovery codes left.</strong>
-                    <p>You should <a asp-page="./GenerateRecoveryCodes">generate a new set of recovery codes</a>.</p>
+                    <strong>Bạn có @Model.RecoveryCodesLeft mã khôi phục.</strong>
+                    <p>Bạn nên <a asp-page="./GenerateRecoveryCodes">tạo ra tập các mã khôi phục mới</a>.</p>
                 </div>
             }
 
             if (Model.IsMachineRemembered)
             {
                 <form method="post" style="display: inline-block">
-                    <button type="submit" class="btn btn-primary">Forget this browser</button>
+                    <button type="submit" class="btn btn-primary">Quên trình duyệt này</button>
                 </form>
             }
-            <a asp-page="./Disable2fa" class="btn btn-primary">Disable 2FA</a>
-            <a asp-page="./GenerateRecoveryCodes" class="btn btn-primary">Reset recovery codes</a>
+            <a asp-page="./Disable2fa" class="btn btn-primary">Loại bỏ 2FA</a>
+            <a asp-page="./GenerateRecoveryCodes" class="btn btn-primary">Đặt lại mã khôi phục</a>
         }
 
-        <h4>Authenticator app</h4>
+        <h4>Ứng dụng xác thực</h4>
         @if (!Model.HasAuthenticator)
         {
-            <a id="enable-authenticator" asp-page="./EnableAuthenticator" class="btn btn-primary">Add authenticator app</a>
+            <a id="enable-authenticator" asp-page="./EnableAuthenticator" class="btn btn-primary">Thêm ứng dụng xác thực</a>
         }
         else
         {
-            <a id="enable-authenticator" asp-page="./EnableAuthenticator" class="btn btn-primary">Set up authenticator app</a>
-            <a id="reset-authenticator" asp-page="./ResetAuthenticator" class="btn btn-primary">Reset authenticator app</a>
+            <a id="enable-authenticator" asp-page="./EnableAuthenticator" class="btn btn-primary">Thiết lập ứng dụng xác thực</a>
+            <a id="reset-authenticator" asp-page="./ResetAuthenticator" class="btn btn-primary">Đặt lại mã khôi phục</a>
         }
     }
     else
     {
         <div class="alert alert-danger">
-            <strong>Privacy and cookie policy have not been accepted.</strong>
-            <p>You must accept the policy before you can enable two factor authentication.</p>
+            <strong>Chính sách riêng tư và dữ liệu không được chấp nhận</strong>
+            <p>Bạn phải chấp nhận chính sách trước khi bạn có thể mở xác thực 2 yếu tố.</p>
         </div>
     }
 }

@@ -1,7 +1,7 @@
-﻿@page
+﻿@page "/user/profile"
 @model IndexModel
 @{
-    ViewData["Title"] = "Profile";
+    ViewData["Title"] = "Hồ sơ tài khoản";
     ViewData["ActivePage"] = ManageNavPages.Index;
 }
 
@@ -14,6 +14,16 @@
             <div class="form-floating mb-3">
                 <input asp-for="Username" class="form-control" placeholder="Please choose your username." disabled />
                 <label asp-for="Username" class="form-label"></label>
+            </div>
+            <div class="form-floating mb-3">
+                <textarea asp-for="Input.HomeAddress" class="form-control" placeholder="Please enter your home address."></textarea>
+                <label asp-for="Input.HomeAddress" class="form-label"></label>
+                <span asp-validation-for="Input.HomeAddress" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                <input asp-for="Input.BirthDate" class="form-control" placeholder="Please enter your birth date."/>
+                <label asp-for="Input.BirthDate" class="form-label"></label>
+                <span asp-validation-for="Input.BirthDate" class="text-danger"></span>
             </div>
             <div class="form-floating mb-3">
                 <input asp-for="Input.PhoneNumber" class="form-control" placeholder="Please enter your phone number."/>

@@ -8,6 +8,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -15,6 +16,7 @@ using razorweb.models;
 
 namespace asprazor04.Areas.Identity.Pages.Account.Manage
 {
+    [Authorize]
     public class ExternalLoginsModel : PageModel
     {
         private readonly UserManager<AppUser> _userManager;
@@ -90,12 +92,12 @@ namespace asprazor04.Areas.Identity.Pages.Account.Manage
             var result = await _userManager.RemoveLoginAsync(user, loginProvider, providerKey);
             if (!result.Succeeded)
             {
-                StatusMessage = "The external login was not removed.";
+                StatusMessage = "Liên kết đăng nhập đã bị loại bỏ.";
                 return RedirectToPage();
             }
 
             await _signInManager.RefreshSignInAsync(user);
-            StatusMessage = "The external login was removed.";
+            StatusMessage = "Liên kết đăng nhập đã bị loại bỏ.";
             return RedirectToPage();
         }
 
@@ -122,20 +124,20 @@ namespace asprazor04.Areas.Identity.Pages.Account.Manage
             var info = await _signInManager.GetExternalLoginInfoAsync(userId);
             if (info == null)
             {
-                throw new InvalidOperationException($"Unexpected error occurred loading external login info.");
+                throw new InvalidOperationException($"Có lỗi xảy ra khi tải thông tin liên kết đăng nhập.");
             }
 
             var result = await _userManager.AddLoginAsync(user, info);
             if (!result.Succeeded)
             {
-                StatusMessage = "The external login was not added. External logins can only be associated with one account.";
+                StatusMessage = "Liên kết đăng nhập chưa được thêm vào. Thông tin đăng nhập bên ngoài chỉ có thể được liên kết với một tài khoản.";
                 return RedirectToPage();
             }
 
             // Clear the existing external cookie to ensure a clean login process
             await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
 
-            StatusMessage = "The external login was added.";
+            StatusMessage = "Liên kết đăng nhập đã được thêm vào";
             return RedirectToPage();
         }
     }

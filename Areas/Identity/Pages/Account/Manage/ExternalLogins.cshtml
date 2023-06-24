@@ -1,4 +1,4 @@
-﻿@page
+﻿@page "/user/profile/external-logins"
 @model ExternalLoginsModel
 @{
     ViewData["Title"] = "Quản lý liên kết với các dịch vụ ngoài";
@@ -22,7 +22,7 @@
                                 <div>
                                     <input asp-for="@login.LoginProvider" name="LoginProvider" type="hidden" />
                                     <input asp-for="@login.ProviderKey" name="ProviderKey" type="hidden" />
-                                    <button type="submit" class="btn btn-primary" title="Remove this @login.ProviderDisplayName login from your account">Loại bỏ</button>
+                                    <button type="submit" class="btn btn-primary" title="Bỏ dùng đăng nhập @login.ProviderDisplayName vào tài khoản của bạn">Bỏ liên kết</button>
                                 </div>
                             </form>
                         }
@@ -45,7 +45,7 @@
             <p>
                 @foreach (var provider in Model.OtherLogins)
                 {
-                    <button id="@($"link-login-button-{provider.Name}")" type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
+                    <button id="@($"link-login-button-{provider.Name}")" type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Đăng nhập sử dụng tài khoản @provider.DisplayName">@provider.DisplayName</button>
                 }
             </p>
         </div>
